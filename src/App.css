@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p {
+  font-family: "Open Sans";
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.leaflet-container {
+  height: 800px;
+  width: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#root {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+#data {
+  display: grid;
+  grid-template-columns: (3, 1fr);
+  column-gap: 10px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+#map {
+  width: 890px;
+  height: 700px;
+  grid-column: 2/ span 2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#view {
+  overflow-y: scroll;
+  height: 640px;
+}
+
+#data p {
+  width: 300px;
+  padding-bottom: 30px;
+}
+
+#data p:nth-child(even) {
+  background-color: rgb(165, 165, 165);
+}
+
+input {
+  width: 300px;
+  height: 40px;
+  margin-bottom: 20px;
+  border: solid 2px rgb(165, 165, 165);
+  font-family: "Open Sans";
+  font-size: 20px;
+  text-indent: 5px;
+  color: #000;
 }
