@@ -5,15 +5,12 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  useMap,
   LayersControl,
   LayerGroup,
 } from "react-leaflet";
-import { Map, popup } from "leaflet";
 import React from "react";
 
 import "./App.css";
-import { click } from "@testing-library/user-event/dist/click";
 // import { DisplayPosition } from "./map";
 
 class App extends Component {
@@ -45,8 +42,7 @@ class App extends Component {
   }
 
   render() {
-    var { isLoaded, data, dataState, marker, zoom, center, forest1, forest2 } =
-      this.state;
+    var { isLoaded, data, dataState, zoom, center } = this.state;
     // var map = this.map;
     var test = data.slice(0, 30);
     var farm1 = data.slice(0, 10);
