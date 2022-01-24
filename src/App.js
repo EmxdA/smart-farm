@@ -11,7 +11,6 @@ import {
 import React from "react";
 
 import "./App.css";
-// import { DisplayPosition } from "./map";
 
 class App extends Component {
   constructor(props) {
