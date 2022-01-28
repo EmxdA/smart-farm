@@ -24,7 +24,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 700px;
+  gap: 550px;
 }
 
 #project-logo {
@@ -58,7 +58,7 @@ nav {
   border: 3px solid #09a319;
 }
 
-.about-us:link {
+.login:link {
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
@@ -70,12 +70,12 @@ nav {
   padding: 10px 20px;
 }
 
-.about-us:visited {
+.login:visited {
   color: #fff;
   border-color: #09a319;
 }
 
-.about-us:hover {
+.login:hover {
   background-color: green;
   border-color: green;
 }

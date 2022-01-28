@@ -21,16 +21,14 @@ class App extends Component {
       forest2: [],
       isLoaded: false,
       dataState: "",
-      center: [51.505, -0.091],
-      zoom: 5,
+      center: [-37, 144],
+      zoom: 6,
       marker: null,
     };
   }
 
   componentDidMount() {
-    fetch(
-      "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10"
-    )
+    fetch("http://3.145.158.103:1880/sensors/list")
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -44,6 +42,7 @@ class App extends Component {
     var { isLoaded, data, dataState, zoom, center } = this.state;
     // var map = this.map;
     var test = data.slice(0, 30);
+    console.log(test.id);
     var farm1 = data.slice(0, 10);
     var farm2 = data.slice(11, 20);
     var farm3 = data.slice(21, 30);
@@ -68,6 +67,7 @@ class App extends Component {
         <div id="data">
           <div className="App">
             <input
+              id="search"
               type="text"
               placeholder="search..."
               onChange={(event) => {
@@ -77,10 +77,10 @@ class App extends Component {
 
             <br></br>
             <button
-              id="reset-btn"
+              class="reset-btn"
               onClick={() => {
                 this.setState({
-                  center: [50, -1],
+                  center: [-37, 144],
                   zoom: 5,
                 });
                 console.log(center, zoom);
@@ -89,13 +89,22 @@ class App extends Component {
               Reset Marker
             </button>
 
+            <button
+              class="reset-btn"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              Refresh Page
+            </button>
+
             <div id="view">
               {test
                 .filter((test) => {
                   if (dataState === "") {
                     return test;
                   } else if (
-                    test.location.street.name
+                    test.sensorName
                       .toLowerCase()
                       .includes(dataState.toLowerCase())
                   ) {
@@ -106,15 +115,14 @@ class App extends Component {
                 })
                 .map((test) => (
                   <p display="none" key={test.id} id="side-info">
-                    ID: {test.id} <br></br>
-                    Street Name: {test.location.street.name}
+                    Sensor Name: {test.sensorName}
                     <br></br>
                     <button
                       onClick={() => {
                         this.setState({
                           center: [
-                            Number(test.location.latitude),
                             Number(test.location.longitude),
+                            Number(test.location.latitude),
                           ],
                           zoom: 18,
                         });
@@ -132,20 +140,20 @@ class App extends Component {
               Travel To Set Marker!
               <LocationMarker />
             </button>
-            <LayersControl position="topright">
+            <LayersControl position="topright" class="map-layer">
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
 
-              <LayersControl.Overlay name="Farm 1">
+              <LayersControl.Overlay checked name="Farm 1">
                 <LayerGroup>
                   {farm1.map((test) => (
                     <Marker
                       key={test.id}
                       position={[
-                        test.location.latitude,
                         test.location.longitude,
+                        test.location.latitude,
                       ]}
                     >
                       {" "}
@@ -165,8 +173,8 @@ class App extends Component {
                     <Marker
                       key={test.id}
                       position={[
-                        test.location.latitude,
                         test.location.longitude,
+                        test.location.latitude,
                       ]}
                     >
                       {" "}
@@ -186,8 +194,8 @@ class App extends Component {
                     <Marker
                       key={test.id}
                       position={[
-                        test.location.latitude,
                         test.location.longitude,
+                        test.location.latitude,
                       ]}
                     >
                       {" "}
