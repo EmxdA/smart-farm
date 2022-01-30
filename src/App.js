@@ -56,6 +56,8 @@ class App extends Component {
     var farm2 = data.slice(11, 20);
     var farm3 = data.slice(21, 30);
 
+    var dict = {1: "temp", 2: "C02", 3:"PH", 4:"soil moisture", 5:"humidity"}
+
     function LocationMarker() {
       const map = useMapEvents({
         click() {
@@ -182,7 +184,7 @@ class App extends Component {
                           })
                           .map((readings) => (
                             <p key={readings.id}>
-                              Type: {readings.sensor_type}<br></br>
+                              Type: {dict[readings.sensor_type]} <br></br>
                               Val: {readings.value} <br></br>Time: {readings.time}
                             </p>
                           ))}
