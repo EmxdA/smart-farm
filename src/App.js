@@ -17,6 +17,7 @@ class App extends Component {
     super(props);
     this.state = {
       data: [],
+      sensors: [],
       forest1: [],
       forest2: [],
       isLoaded: false,
@@ -36,13 +37,21 @@ class App extends Component {
           data: json,
         });
       });
+    fetch("http://3.145.158.103:1880/sensors/lastValue")
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          isLoaded: true,
+          sensors: json,
+        });
+      });
   }
 
   render() {
-    var { isLoaded, data, dataState, zoom, center } = this.state;
+    var { isLoaded, data, dataState, zoom, center, sensors } = this.state;
     // var map = this.map;
     var test = data.slice(0, 30);
-    console.log(test.id);
+    var readings = sensors;
     var farm1 = data.slice(0, 10);
     var farm2 = data.slice(11, 20);
     var farm3 = data.slice(21, 30);
@@ -90,12 +99,12 @@ class App extends Component {
             </button>
 
             <button
-              class="reset-btn"
+              class="refresh-btn"
               onClick={() => {
                 window.location.reload();
               }}
             >
-              Refresh Page
+              <ion-icon name="refresh"></ion-icon>
             </button>
 
             <div id="view">
@@ -114,10 +123,11 @@ class App extends Component {
                   }
                 })
                 .map((test) => (
-                  <p display="none" key={test.id} id="side-info">
-                    Sensor Name: {test.sensorName}
+                  <p display="none" key={test.sensor_id} id="side-info">
+                    {test.sensorName}
                     <br></br>
                     <button
+                      class = "set-btn"
                       onClick={() => {
                         this.setState({
                           center: [
@@ -150,17 +160,32 @@ class App extends Component {
                 <LayerGroup>
                   {farm1.map((test) => (
                     <Marker
-                      key={test.id}
+                      key={test.sensor_id}
                       position={[
                         test.location.longitude,
                         test.location.latitude,
                       ]}
                     >
                       {" "}
-                      <Popup>
-                        <p>ID: {test.id}</p>
-                        <p>Longitude: {test.location.longitude}</p>
-                        <p>Latitude: {test.location.latitude} </p>
+                      <Popup class="popup">
+                        {readings
+                          .filter((readings) => {
+                            if (
+                              readings.sensor_id
+                                .toString()
+                                .includes(test.sensor_id.toString())
+                            ) {
+                              console.log(readings.sensor_id.toString());
+                              return readings.sensor_id;
+                            }
+                            return null;
+                          })
+                          .map((readings) => (
+                            <p key={readings.id}>
+                              Type: {readings.sensor_type}<br></br>
+                              Val: {readings.value} <br></br>Time: {readings.time}
+                            </p>
+                          ))}
                       </Popup>
                     </Marker>
                   ))}
@@ -171,7 +196,7 @@ class App extends Component {
                 <LayerGroup>
                   {farm2.map((test) => (
                     <Marker
-                      key={test.id}
+                      key={test.sensor_id}
                       position={[
                         test.location.longitude,
                         test.location.latitude,

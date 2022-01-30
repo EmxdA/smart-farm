@@ -38,26 +38,28 @@ p {
 
 #view {
   overflow-y: scroll;
-  height: 640px;
+  height: 580px;
 }
 
 #data p {
   width: 300px;
-  padding-bottom: 30px;
+  padding: 10px 0;
+  border-bottom: solid 3px  #09a319;
 }
 
-#data p:nth-child(even) {
+/* #data p:nth-child(even) {
   background-color: rgb(165, 165, 165);
-}
+} */
 
 #search {
   width: 300px;
-  height: 40px;
-  margin-bottom: 20px;
-  border: solid 2px rgb(165, 165, 165);
+  height: 50px;
+  margin-bottom: 10px;
+  border: solid 2px #000;
   font-family: "Open Sans";
   font-size: 20px;
   text-indent: 5px;
+  border-radius: 10px;
   color: #000;
 }
 
@@ -70,7 +72,47 @@ p {
 }
 
 .reset-btn {
-  padding: 10px;
-  margin-bottom: 15px;
-  margin-right: 20px;
+  border: solid 2px #000;
+  background-color: #fff;
+  color: #000;
+  padding: 14px 20px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.refresh-btn {
+  background-color: #09a319;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.set-btn {
+  background-color: #09a319;
+  color: white;
+  padding: 10px 11px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.refresh-btn:hover {
+  background-color: green;
+}
+
+.set-btn:hover {
+  background-color: green;
+}
+
+.reset-btn:hover {
+  border-color: #09a319;
+  color: #09a319;
 }
