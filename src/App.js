@@ -56,7 +56,7 @@ class App extends Component {
     var farm2 = data.slice(11, 20);
     var farm3 = data.slice(21, 30);
 
-    var dict = {1: "temp", 2: "C02", 3:"PH", 4:"soil moisture", 5:"humidity"}
+    var dict = {1: "temp", 2: "humidity", 3:"soil moisture", 4: "PH", 5:"C02"}
 
     function LocationMarker() {
       const map = useMapEvents({
